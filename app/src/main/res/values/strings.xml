@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AA Notifications</string>
+    <string name="notification_channel_android_auto_alerts_title">Alerts</string>
+    <string name="notification_channel_android_auto_alerts_description">Show traffic alerts</string>
+    <string name="notification_channel_android_auto_navigation_title">Navigation</string>
+    <string name="notification_channel_android_auto_navigation_description">Show navigation instructions</string>
+</resources>

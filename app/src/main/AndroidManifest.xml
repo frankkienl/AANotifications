@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="nl.frankkie.aanotifications">
+
+
+    <uses-permission android:name="com.google.android.libraries.car.app.ACCESS_SURFACE" />
+    <uses-permission android:name="com.google.android.libraries.car.app.NAVIGATION_TEMPLATES" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AANotifications">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <!-- Android Auto //-->
+        <service
+            android:name=".car.BaseCarAppService"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_round"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="com.google.android.car.action.CAR_APP" />
+                <category android:name="com.google.android.car.category.NAVIGATION" />
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name=".car.CarNotificationReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="ACTION_OPEN_AUTO_APP" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.google.android.gms.car.application"
+            android:resource="@xml/automotive_app_desc" />
+
+
+    </application>
+
+</manifest>
