@@ -44,6 +44,7 @@ class CarMapScreen(carContext: CarContext) : Screen(carContext) {
                         )
                     )
                 )
+                .setTitle("Test")
                 .setOnClickListener {
                     CarToast.makeText(
                         carContext,
@@ -54,6 +55,12 @@ class CarMapScreen(carContext: CarContext) : Screen(carContext) {
                     //To test the background notification aspect.
                     handler.postDelayed({
                         reigerNotification()
+
+                        CarToast.makeText(
+                            carContext,
+                            "If you didn't see a notification, you reproduced the bug.",
+                            CarToast.LENGTH_SHORT
+                        ).show()
                     }, 2000)
                 }.build()
         )
