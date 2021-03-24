@@ -83,7 +83,8 @@ class CarMapScreen(carContext: CarContext) : Screen(carContext) {
             ).apply {
                 setWhen(System.currentTimeMillis())
                 setAutoCancel(true)
-                setOnlyAlertOnce(true) //Needed for HUN
+                //UPDATE: this was NOT needed for HUN, commented out.
+                //setOnlyAlertOnce(true) //Needed for HUN
                 //setOngoing(false)
 
                 //Intentionally commented line
