@@ -33,7 +33,22 @@ class CarMapScreen(carContext: CarContext) : Screen(carContext) {
 
     private fun buildActionStrip(carContext: CarContext): ActionStrip {
         val builder = ActionStrip.builder()
-        //this builder pattern is pretty much unreadable.
+        //Merel button
+        builder.addAction(
+            Action.builder()
+                .setIcon(
+                    CarIcon.of(
+                        IconCompat.createWithResource(
+                            carContext,
+                            R.drawable.merel
+                        )
+                    )
+                )
+                .setOnClickListener {
+                    clickedMerelAction()
+                }.build()
+        )
+        //Reiger button
         builder.addAction(
             Action.builder()
                 .setIcon(
@@ -46,27 +61,34 @@ class CarMapScreen(carContext: CarContext) : Screen(carContext) {
                 )
                 .setTitle("Test")
                 .setOnClickListener {
-                    CarToast.makeText(
-                        carContext,
-                        "Notification coming soon!",
-                        CarToast.LENGTH_SHORT
-                    ).show()
-                    //Delay few seconds, so you can move to different app;
-                    //To test the background notification aspect.
-                    handler.postDelayed({
-                        reigerNotification()
-
-                        CarToast.makeText(
-                            carContext,
-                            "If you didn't see a notification, you reproduced the bug.",
-                            CarToast.LENGTH_SHORT
-                        ).show()
-                    }, 2000)
+                    clickedReigerAction()
                 }.build()
         )
         return builder.build()
     }
 
+    private fun clickedReigerAction(){
+        CarToast.makeText(
+            carContext,
+            "Notification coming soon!",
+            CarToast.LENGTH_SHORT
+        ).show()
+        //Delay few seconds, so you can move to different app;
+        //To test the background notification aspect.
+        handler.postDelayed({
+            reigerNotification()
+
+            CarToast.makeText(
+                carContext,
+                "If you didn't see a notification, you reproduced the bug.",
+                CarToast.LENGTH_SHORT
+            ).show()
+        }, 2000)
+    }
+
+    private fun clickedMerelAction() {
+
+    }
 
     /**
      * for reference, the notification-testing-bird is named Reiger.
