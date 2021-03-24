@@ -33,21 +33,23 @@ class CarMapScreen(carContext: CarContext) : Screen(carContext) {
 
     private fun buildActionStrip(carContext: CarContext): ActionStrip {
         val builder = ActionStrip.Builder()
-        //Merel button
-        builder.addAction(
-            Action.Builder()
-                .setIcon(
-                    CarIcon.Builder(
-                        IconCompat.createWithResource(
-                            carContext,
-                            R.drawable.merel
-                        )
-                    ).build()
-                )
-                .setOnClickListener {
-                    clickedMerelAction()
-                }.build()
-        ).build()
+        if (CarDebugToggles.enableMerel) {
+            //Merel button
+            builder.addAction(
+                Action.Builder()
+                    .setIcon(
+                        CarIcon.Builder(
+                            IconCompat.createWithResource(
+                                carContext,
+                                R.drawable.merel
+                            )
+                        ).build()
+                    )
+                    .setOnClickListener {
+                        clickedMerelAction()
+                    }.build()
+            ).build()
+        }
         //Reiger button
         builder.addAction(
             Action.Builder()

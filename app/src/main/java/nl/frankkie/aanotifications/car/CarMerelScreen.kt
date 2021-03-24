@@ -1,11 +1,22 @@
 package nl.frankkie.aanotifications.car
 
-import com.google.android.libraries.car.app.CarContext
-import com.google.android.libraries.car.app.Screen
-import com.google.android.libraries.car.app.model.Template
+import androidx.car.app.CarContext
+import androidx.car.app.Screen
+import androidx.car.app.model.ItemList
+import androidx.car.app.model.ListTemplate
+import androidx.car.app.model.Row
+import androidx.car.app.model.Template
 
 class CarMerelScreen(carContext: CarContext) : Screen(carContext) {
-    override fun getTemplate(): Template {
-        TODO("Not yet implemented")
+    override fun onGetTemplate(): Template {
+        val templateBuilder = ListTemplate.Builder()
+        templateBuilder.setSingleList(buildList())
+        return templateBuilder.build()
+    }
+
+    private fun buildList(): ItemList {
+        val itemListBuilder = ItemList.Builder()
+        itemListBuilder.addItem(Row.Builder().setTitle("TODO").build())
+        return itemListBuilder.build()
     }
 }
