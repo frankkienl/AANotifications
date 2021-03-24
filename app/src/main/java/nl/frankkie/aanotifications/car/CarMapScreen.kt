@@ -6,58 +6,58 @@ import android.content.ComponentName
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Handler
+import androidx.car.app.CarContext
+import androidx.car.app.CarToast
+import androidx.car.app.Screen
+import androidx.car.app.model.Action
+import androidx.car.app.model.ActionStrip
+import androidx.car.app.model.CarIcon
+import androidx.car.app.model.Template
+import androidx.car.app.navigation.model.NavigationTemplate
+import androidx.car.app.notification.CarAppExtender
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.graphics.drawable.IconCompat
-import com.google.android.libraries.car.app.CarContext
-import com.google.android.libraries.car.app.CarToast
-import com.google.android.libraries.car.app.Screen
-import com.google.android.libraries.car.app.model.Action
-import com.google.android.libraries.car.app.model.ActionStrip
-import com.google.android.libraries.car.app.model.CarIcon
-import com.google.android.libraries.car.app.model.Template
-import com.google.android.libraries.car.app.navigation.model.NavigationTemplate
-import com.google.android.libraries.car.app.notification.CarAppExtender
 import nl.frankkie.aanotifications.MyApplication
 import nl.frankkie.aanotifications.R
 
 class CarMapScreen(carContext: CarContext) : Screen(carContext) {
     private val handler = Handler()
 
-    override fun getTemplate(): Template {
-        val templateBuilder = NavigationTemplate.builder()
+    override fun onGetTemplate(): Template {
+        val templateBuilder = NavigationTemplate.Builder()
         val actionStrip = buildActionStrip(carContext)
         templateBuilder.setActionStrip(actionStrip)
         return templateBuilder.build()
     }
 
     private fun buildActionStrip(carContext: CarContext): ActionStrip {
-        val builder = ActionStrip.builder()
+        val builder = ActionStrip.Builder()
         //Merel button
         builder.addAction(
-            Action.builder()
+            Action.Builder()
                 .setIcon(
-                    CarIcon.of(
+                    CarIcon.Builder(
                         IconCompat.createWithResource(
                             carContext,
                             R.drawable.merel
                         )
-                    )
+                    ).build()
                 )
                 .setOnClickListener {
                     clickedMerelAction()
                 }.build()
-        )
+        ).build()
         //Reiger button
         builder.addAction(
-            Action.builder()
+            Action.Builder()
                 .setIcon(
-                    CarIcon.of(
+                    CarIcon.Builder(
                         IconCompat.createWithResource(
                             carContext,
                             R.drawable.reiger
                         )
-                    )
+                    ).build()
                 )
                 .setTitle("Test")
                 .setOnClickListener {
@@ -128,7 +128,7 @@ class CarMapScreen(carContext: CarContext) : Screen(carContext) {
 
         //Set Android Auto part of notification
         notificationBuilder.extend(
-            CarAppExtender.builder()
+            CarAppExtender.Builder()
                 .apply {
                     setImportance(NotificationManagerCompat.IMPORTANCE_HIGH)
                     setLargeIcon(
