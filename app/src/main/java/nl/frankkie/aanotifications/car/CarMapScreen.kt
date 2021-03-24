@@ -9,6 +9,7 @@ import android.os.Handler
 import androidx.car.app.CarContext
 import androidx.car.app.CarToast
 import androidx.car.app.Screen
+import androidx.car.app.ScreenManager
 import androidx.car.app.model.Action
 import androidx.car.app.model.ActionStrip
 import androidx.car.app.model.CarIcon
@@ -69,7 +70,7 @@ class CarMapScreen(carContext: CarContext) : Screen(carContext) {
         return builder.build()
     }
 
-    private fun clickedReigerAction(){
+    private fun clickedReigerAction() {
         CarToast.makeText(
             carContext,
             "Notification coming soon!",
@@ -89,7 +90,8 @@ class CarMapScreen(carContext: CarContext) : Screen(carContext) {
     }
 
     private fun clickedMerelAction() {
-
+        val sm = carContext.getCarService(ScreenManager::class.java)
+        sm.push(CarMerelScreen(carContext))
     }
 
     /**
