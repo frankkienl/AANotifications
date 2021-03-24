@@ -1,20 +1,38 @@
 package nl.frankkie.aanotifications.car
 
 import android.content.Intent
-import com.google.android.libraries.car.app.CarAppService
-import com.google.android.libraries.car.app.CarToast
-import com.google.android.libraries.car.app.Screen
+import android.content.res.Configuration
+import androidx.car.app.CarAppService
+import androidx.car.app.CarToast
+import androidx.car.app.Screen
+import androidx.car.app.Session
+import androidx.car.app.validation.HostValidator
 
 class BaseCarAppService : CarAppService() {
-    override fun onCreateScreen(intent: Intent): Screen {
 
-        CarToast.makeText(
-            carContext,
-            "Press button in action strip!",
-            CarToast.LENGTH_LONG
-        ).show()
+    private val session = object : Session() {
+        override fun onCreateScreen(intent: Intent): Screen {
+            CarToast.makeText(
+                carContext,
+                "Press button in action strip!",
+                CarToast.LENGTH_LONG
+            ).show()
 
-        return CarMapScreen(carContext)
+            return CarMapScreen(carContext)
+        }
+
+        override fun onCarConfigurationChanged(newConfiguration: Configuration) {
+        }
+
+        override fun onNewIntent(intent: Intent) {
+        }
     }
 
+    override fun createHostValidator(): HostValidator {
+        return HostValidator.ALLOW_ALL_HOSTS_VALIDATOR
+    }
+
+    override fun onCreateSession(): Session {
+        return session
+    }
 }
